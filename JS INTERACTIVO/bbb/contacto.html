@@ -2,6 +2,7 @@
 <html lang="es">
     <head data-include="../reutilizables/head.html">
     <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Alerts más bonitas -->
     <title>Ventas BBB</title>
 </head>
 
@@ -67,7 +68,7 @@
                             <option selected disabled>Selecciona una opción</option>
                         </select>
                     </div>
-                    <button class="btn btn-primary fw-semibold px-4">
+                    <button class="btn btn-primary fw-semibold px-4" id="btn-buscar">
                         <i class="fa-solid fa-magnifying-glass-location me-2"></i>Buscar tienda
                     </button>
                 </div>
@@ -91,7 +92,8 @@
                         <th scope="col">Contacto</th>
                     </tr>
                 </thead>
-                <tbody>
+                <!--tbody debe cargarse de forma dinámica-->
+                <tbody id="tbody-sucursales">
                     <tr class="align-middle">
                         <th scope="row" class="text-center">1</th>
                         <th scope="row">Ciudad de México</th>
