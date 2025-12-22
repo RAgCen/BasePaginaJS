@@ -1,0 +1,50 @@
+/* HOJA DE ESTILOS QUE NO USAN BOOTSTRAP */
+
+.body-bg-image {
+    /*background-image: linear-gradient(to bottom, rgba(151, 29, 7, 0.25), #f8f9fa);*/
+    /*background-image: url('/imagenes/fondo.jpg');*/
+    /*background-color: #ffffff;*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* MANEJO DE TAMAÑOS DE FUENTE */
+.text-8px { font-size: 8px; }
+.text-10px { font-size: 10px; }
+.text-11px { font-size: 11px; }
+.text-12px { font-size: 12px; }
+.text-13px { font-size: 13px; }
+.text-14px { font-size: 14px; }
+.text-16px { font-size: 16px; }
+.text-18px { font-size: 18px; }
+.text-20px { font-size: 20px; }
+
+/* MANEJO DE COLORES PERSONALIZABLES */
+.text-fg-blue {
+    color: rgb(0, 71, 157);
+    font-weight: bold;
+}
+
+.text-fg-white {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.text-fg-green {
+    color: #255329;
+    font-weight: bold;
+}
+
+.bg-cartoon-box { color: rgb(176, 148, 110); }
+.bg-color-blue { background-color: rgb(0, 71, 157); }
+.bg-color-light-gray { background-color: #d1d7db;}
+.bg-color-header { background-color: #c5deee;}
+
+#carouselControls .carousel-item img {
+    object-fit: contain;
+    width: 100%;
+    max-height: 400px;
+    object-position: center;
+}

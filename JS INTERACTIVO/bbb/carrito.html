@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head data-include="../reutilizables/head.html">
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Ventas BBB</title>
+</head>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+</script>
+
+<script src="/js/Funciones_Generales.js" defer></script>
+<script type="module" src="/js/Funciones_Carrito.js"></script>
+    
+<body data-include="/reutilizables/scripts.html" class="body-bg-image">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/inicio.html"><i class="fa-solid fa-b"></i> &emsp; Tienda Oficial </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../inicio.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/bbb/catalogo.html">Catálogo de productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/bbb/contacto.html">Contacto y sucursales</a></li>
+                    <li class="nav-item position-relative">
+                        <a class="nav-link active" href="/bbb/carrito.html">&nbsp;
+                            <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                            <span class="position-absolute bottom-0 start-100 translate-middle badge rounded-pill bg-danger">1</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header data-include="../reutilizables/header.html" class="bg-light text-center py-3"></header>
+
+    <section class="container my-5">
+        <h2 class="text-center fw-bold text-fg-blue mb-4 bg-light">Tu carrito de compras</h2>
+      
+        <!-- Tabla de productos -->
+        <div class="table-responsive shadow-sm p-3 rounded">
+            <table class="table table-hover mb-0 align-middle text-center table-bordered">
+                <thead class="bg-dark text-white fw-semibold">
+                    <tr class="table-primary">
+                        <th scope="col" style="width: 5%;">#</th>
+                        <th scope="col" style="width: 9%;">Producto</th>
+                        <th scope="col" style="width: 50%;">Descripción</th>
+                        <th scope="col" style="width: 10%;">Precio</th>
+                        <th scope="col" style="width: 18%;">Cantidad</th>
+                        <th scope="col" style="width: 13%;">Subtotal</th>
+                        <th scope="col" style="width: 10%;">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>
+                        <i class="fa-solid fa-box-open fa-3x bg-cartoon-box"></i>
+                        </td>
+                        <td class="text-start">Caja de cartón de muestra resistente, ideal para embalaje.</td>
+                        <td>$499.00</td>
+                        <td>
+                        <div class="d-flex justify-content-center align-items-center flex-column gap-1">
+                            <span>1</span>
+                            <div class="d-flex flex-row gap-3">
+                                <button class="btn btn-outline-success btn-sm rounded-circle">
+                                    <i class="fa-solid fa-plus fa-lg"></i>
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm rounded-circle">
+                                    <i class="fa-solid fa-minus fa-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                        </td>
+                        <td>$499.00</td>
+                        <td>
+                            <div>
+                                <img src="/imagenes/acciones/eliminar.png" width="27" height="27" style="cursor:pointer">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      
+        <div class="row mt-4">
+            <div class="col-md-6 mb-4">
+                <h5 class="fw-bold text-fg-blue">Cupón de descuento</h5>
+                <div class="input-group mt-2">
+                    <input type="text" class="form-control" placeholder="Introduce tu cupón...">
+                    <button class="btn btn-primary fw-semibold" type="button">Aplicar</button>
+                </div>
+            </div>
+      
+            <div class="col-md-6">
+                <div class="border rounded p-3 shadow-smt border border-success">
+                    <h5 class="fw-bold text-fg-blue mb-3">Total de compra</h5>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Cantidad de artículos:</span>
+                        <span class="fw-semibold">1</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span class="fw-semibold">$499.00</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Descuento aplicado:</span>
+                        <span class="fw-semibold text-success">-15%</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between fs-5 fw-bold mb-3">
+                        <span>Total:</span>
+                        <span>$499.00</span>
+                    </div>
+                    <div class="text-end">
+                        <button class="btn btn-success fw-semibold px-4">Proceder al pago</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+      
+    <footer data-include="../reutilizables/footer.html" class="bg-dark text-light pt-5 pb-3 mt-5"></footer>
+</body>
+
+</html>
+
+
