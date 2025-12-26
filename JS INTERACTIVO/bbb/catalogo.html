@@ -2,6 +2,7 @@
 <html lang="es">
     <head data-include="../reutilizables/head.html">
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="/css/catalogo.css">
     <title>Ventas BBB</title>
 </head>
@@ -12,7 +13,40 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
 </script>
 <script src="/js/Funciones_Generales.js" defer></script>
-<script src="/js/Funciones_Catalogo.js"></script>
+<script type = "module">
+    import { mostrarProducto } from './../js/Funciones_Catalogo.js';
+
+    const enlacesCategoria = document.querySelectorAll('.navbar-categorias .nav-link');
+
+    function clickCategoria(e){
+        e.preventDefault();
+
+        // ------- Cada navbar se va a trabajar como link
+        // --- active = slección de elmentos en la página
+
+        enlacesCategoria.forEach(link => link.classList.remove('active')); // Se remueve la clase active de todos los links
+
+        const categoriaClickeada = e.currentTarget; // Se le dice al evento que indique qué es lo que el ususario seleccionó
+
+        categoriaClickeada.classList.add('active'); // Se agrega la clase active al link seleccionado
+
+        const categoria = categoriaClickeada.dataset.categoria; // Se obtiene la categoría del link seleccionado
+
+        mostrarProductos(categoria.trim()); // Se muestran los productos de la categoría seleccionada
+    }
+
+    mostrarProductos('Electrónica'); // Mostrar productos de la categoría Electrónica al cargar la página 
+
+    enlacesCategoria.forEach(link => {
+        if(link.dataset.categoria==="Electrónica"){
+            link.classList.add('active');
+        }
+    });
+
+    enlacesCategoria.forEach(link => {
+        link.addEventListener('click', clickCategoria);
+    });
+</script>
     
 <body data-include="/reutilizables/scripts.html" class="body-bg-image">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -45,11 +79,12 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSeccion">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-mobile-screen"></i>&nbsp;Electrónica</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-shirt"></i>&nbsp;Moda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-couch"></i>&nbsp;Hogar</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-dumbbell"></i>&nbsp;Deportes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-gift"></i>&nbsp;Regalos</a></li>
+                    <!-- data-categoria = "------" es para eliminar los espacios-->
+                    <li class="nav-item"><a class="nav-link" data-categoria = "Electrónica" href="#"><i class="fa-solid fa-mobile-screen"></i>&nbsp;Electrónica</a></li>
+                    <li class="nav-item"><a class="nav-link" data-categoria = "Moda" href="#"><i class="fa-solid fa-shirt"></i>&nbsp;Moda</a></li>
+                    <li class="nav-item"><a class="nav-link" data-categoria = "Hogar" href="#"><i class="fa-solid fa-couch"></i>&nbsp;Hogar</a></li>
+                    <li class="nav-item"><a class="nav-link" data-categoria = "Deportes" href="#"><i class="fa-solid fa-dumbbell"></i>&nbsp;Deportes</a></li>
+                    <li class="nav-item"><a class="nav-link" data-categoria = "Regalos" href="#"><i class="fa-solid fa-gift"></i>&nbsp;Regalos</a></li>
                 </ul>
             </div>
         </div>
@@ -106,6 +141,11 @@
             </aside>
 
             <section class="col-md-9">
+                <!-- row es para la distribución (diseño responsivo) -->
+                <div class="row row-cols-1 row-cols-md-3 g-4" id="productosContainer">
+                    <!-- Aquí se cargarán los productos dinámicamente -->
+                </div>
+                <!--
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     <div data-aos="flip-up" data-aos-duration="1200" class="col">
                         <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
@@ -120,207 +160,8 @@
                                 <p>5 estrellas</p>
                             </div>
                         </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 2</h5>
-                            <p class="text-muted mb-1">Modelo: X-002</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 3</h5>
-                            <p class="text-muted mb-1">Modelo: X-003</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 4</h5>
-                            <p class="text-muted mb-1">Modelo: X-004</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 5</h5>
-                            <p class="text-muted mb-1">Modelo: X-005</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 6</h5>
-                            <p class="text-muted mb-1">Modelo: X-006</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 7</h5>
-                            <p class="text-muted mb-1">Modelo: X-007</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 8</h5>
-                            <p class="text-muted mb-1">Modelo: X-008</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 9</h5>
-                            <p class="text-muted mb-1">Modelo: X-009</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 10</h5>
-                            <p class="text-muted mb-1">Modelo: X-010</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 11</h5>
-                            <p class="text-muted mb-1">Modelo: X-011</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 12</h5>
-                            <p class="text-muted mb-1">Modelo: X-012</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 13</h5>
-                            <p class="text-muted mb-1">Modelo: X-013</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1200" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 14</h5>
-                            <p class="text-muted mb-1">Modelo: X-014</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center gap-2">
-                                <p>5 estrellas</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-aos="flip-up" data-aos-duration="1300" class="col">
-                        <div class="card border-2 shadow-sm p-4 h-100 text-center position-relative">
-                            <button class="btn btn-sm position-absolute top-0 end-0 m-2 p-0 bg-transparent border-0">
-                                <img src="/imagenes/acciones/info.png" width="28" height="28" class="rounded-circle shadow-sm">
-                            </button>
-                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box mb-3"></i>
-                            <h5 class="fw-bold">Artículo 15</h5>
-                            <p class="text-muted mb-1">Modelo: X-015</p>
-                            <p class="fw-semibold text-success">$499.00 MXN</p>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <p>5 estrellas</p>
-                                <!-- <div>
-                                    <img src="/imagenes/acciones/agregar.png" width="21px" height="21px" style="cursor:pointer;">
-                                </div> -->
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                -->
             </section>
         </div>
     </main>      
@@ -373,7 +214,3 @@
 </body>
 
 </html>
-
-
-
-
