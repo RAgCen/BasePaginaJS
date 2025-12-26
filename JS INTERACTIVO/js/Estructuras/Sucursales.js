@@ -1,9 +1,9 @@
-const delegacion = {
+/*const delegacion = {
     idDelegacion: 0,   // Int
     nombre: "",        // String
     abreviatura: "",   // String
     estado: ""         // String 
-}
+}*/
 
 let delegaciones = [
     {idDelegacion: 1, nombre: "Álvaro Obregón", abreviatura: "AO", estado: "CDMX"},
@@ -34,7 +34,7 @@ let delegaciones = [
 ]
 
 
-
+/*
 const sucursal = {
     idSucursal: null,    // Int
     estado: "",          // String
@@ -44,7 +44,7 @@ const sucursal = {
     horasLaborales: "",  // String
     correo: "",          // String
     telefono: ""         // String
-}
+}*/
 
 
 let sucursales = [
@@ -88,7 +88,7 @@ export function getDelegaciones(estado){
 }
 
 export function buscarPorEstado(estado){
-    const resultado=sucursales.filter(s => sucursal.estado === estado).map(s =>{
+    const resultado=sucursales.filter(s => s.estado === estado).map(s =>{
         // .find se encarga de buscar un solo elemento que cumpla con la condicion
         const delegacion = delegaciones.find(d => d.idDelegacion === s.idDelegacion); // Acceso a la estructura delegaciones desde sucursal usando delegacion
 
@@ -109,13 +109,14 @@ export function buscarPorEstado(estado){
 }
 
 
-export function buscarPorEstadoDelegacion(estado,idDelegacion){
-    const resultado=sucursales.filter(s => sucursal.estado === estado).map(s =>{
+export function buscarPorEstadoDelegacion(estado, idDeleg){
+    const resultado = sucursales.filter(s => s.estado === estado).map(s =>{
         // .find se encarga de buscar un solo elemento que cumpla con la condicion
         const delegacion = delegaciones.find(d => d.idDelegacion === s.idDelegacion); // Acceso a la estructura delegaciones desde sucursal usando delegacion
 
         return {
             idSucursal: s.idSucursal,
+            idDelegacion: s.idDelegacion, // En este caso se usa el id de la delegación para comparar y hacer el filtrado posterior
             estado: s.estado,
             delegacion: delegacion?.nombre || "No encontrado", // Operador de encadenamiento opcional, puede o no estar, en caso de no encontrar muestra el string
             abreviatura: delegacion?.abreviatura || "N.A",
@@ -124,8 +125,9 @@ export function buscarPorEstadoDelegacion(estado,idDelegacion){
             horasLaborales: s.horasLaborales,
             correo: s.correo,
             telefono: s.telefono
-        }
-        // En bases de datos, las se usa JOIN, INNER JOIN, LEFT JOIN, RIGHT JOIN para unir tablas relacionadas
-    });
-    return resultado
+        };
+            // En bases de datos, las se usa JOIN, INNER JOIN, LEFT JOIN, RIGHT JOIN para unir tablas relacionadas
+    }).filter(s => s.idDelegacion == idDeleg)
+    // console.log(resultado); Para verificar si el arreglo está vacío o no
+    return resultado;
 }
