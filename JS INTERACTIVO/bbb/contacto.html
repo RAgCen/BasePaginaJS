@@ -93,7 +93,9 @@
                     </tr>
                 </thead>
                 <!--tbody debe cargarse de forma dinámica-->
+                
                 <tbody id="tbody-sucursales">
+                    <!--
                     <tr class="align-middle">
                         <th scope="row" class="text-center">1</th>
                         <th scope="row">Ciudad de México</th>
@@ -106,6 +108,7 @@
                             <img src="/imagenes/acciones/contacto.png" width="32px" style="cursor:pointer;">
                         </th>
                     </tr>
+                    -->
                 </tbody>
             </table>
         </div>
@@ -121,9 +124,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                 </div>
                 <div class="modal-body">
-                    <h3 class="fw-semibold text-center mb-3">Sucursal 1</h3>
-                    <p class="mb-2"><strong>Teléfono: </strong><span>55 1234 5678</span></p>
-                    <p class="mb-2"><strong>Correo: </strong><span>sucursal@example.com</span></p>
+                    <h3 class="fw-semibold text-center mb-3" id = "nombreSucursal">Sucursal 1</h3>
+                    <p class="mb-2"><strong>Teléfono: </strong><span id ="spanTelefono">55 1234 5678</span></p>
+                    <p class="mb-2"><strong>Correo: </strong><span id ="spanCorreo">sucursal@example.com</span></p>
                 </div>
             </div>
         </div>
