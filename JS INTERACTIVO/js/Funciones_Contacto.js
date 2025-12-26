@@ -1,7 +1,7 @@
 import { getDelegaciones, buscarPorEstado, buscarPorEstadoDelegacion } from "./Estructuras/Sucursales.js"; // Al hacer el import el archivo se convierte en un modulo
 
 function getEstado(){return document.getElementById("estado").value;}
-function getDelegacion(){return document.getElementById("delegacion").value;}
+function getDelegacion(){return document.getElementById("delegacion").value;} // Se regresa el idDelegacion en lugar del nombre de la delegacion
 
 
 function motrarDivDelegacion(){
@@ -32,7 +32,6 @@ function cargarDelegaciones(){
 }
 
 
-
 function validarBusqueda(){
     const estado = getEstado(); // Obligatorio para la búsqueda
     const delegacion = getDelegacion(); // Opcional para la búsqueda
@@ -53,6 +52,9 @@ function validarBusqueda(){
         }
         const resultado = buscarPorEstadoDelegacion(estado, delegacion);
         cargarTabla(resultado);
+        // Para verificar en consola los valores obtenidos
+        // console.log(estado);
+        // console.log(delegacion);
     }
 }
 
@@ -63,7 +65,9 @@ function cargarTabla(lista){
 
     if(lista.length==0){
         // colspan sirve para unir varias columnas en una sola
+
         // text-center sirve para centrar el texto dentro de una celda
+
         // py-3 sirve para agregar padding vertical (arriba y abajo) de 1rem (16px). Se deja que Bootstrap haga el trabajo para no tener que usar CSS personalizado y se pueda visualizar la página en diferentes dispositivos
         tbodyDestino.innerHTML=`
             <tr>
@@ -87,11 +91,23 @@ function cargarTabla(lista){
                     <br> ${s.horasLaborales}
                 </th>
                 <th scope="row" class="text-center">
-                    <img src="/imagenes/acciones/contacto.png" width="32px" style="cursor:pointer;">
+                    <img src="/imagenes/acciones/contacto.png" width="32px" style="cursor:pointer;
+                    onclick='abrirModal(${JSON.stringify(s)})' ">
                 </th>
             </tr>
         `
     })
+}
+
+
+function abrirModal(sucursal){
+    document.getElementById("nombreSucursal").textContent = "Sucursal " + sucursal.estado;
+    document.getElementById("spanTelefono").textContent = "Sucursal " + sucursal.telefono;
+    document.getElementById("spanCorreo").textContent = `Sucursal ${sucursal.correo}`;
+
+    const modal = new bootstrap.Modal(document.getElementById("modalContacto"));
+    modal.show();
+
 }
 
 
