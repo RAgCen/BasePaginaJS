@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head data-include="../reutilizables/head.html">
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Alerts más bonitas -->
+    <title>Ventas BBB</title>
+</head>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+</script>
+
+<script src="/js/Funciones_Generales.js" defer></script>
+<script type="module" src="/js/Funciones_Contacto.js"></script>
+    
+<body data-include="/reutilizables/scripts.html" class="body-bg-image">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/inicio.html"><i class="fa-solid fa-b"></i> &emsp; Tienda Oficial </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="../inicio.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/bbb/catalogo.html">Catálogo de productos</a></li>
+                    <li class="nav-item position-relative">
+                        <a class="nav-link" href="/bbb/carrito.html">
+                            <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                            <span class="position-absolute bottom-0 start-100 translate-middle badge rounded-pill bg-danger" id="spanCarrito">1</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header data-include="../reutilizables/header.html" class="bg-light text-center py-3"></header>
+
+    <section class="container my-3">
+        <h2 class="text-center fw-bold text-fg-blue mb-4 bg-light"> Encuentra tu tienda más cercana </h2>
+        <p class="text-center fs-5 mx-auto" style="max-width: 800px;">
+            En <strong>Ventas BBB</strong> contamos con una sólida red de sucursales en toda el área metropolitana y sus 
+            alrededores. 
+            <br>
+            Sin importar dónde te encuentres, siempre habrá una tienda BBB cerca de ti, lista para ofrecerte 
+            la mejor atención y servicio al recoger tus productos.
+        </p>
+
+        <div class="row align-items-center mt-5">
+            <div class="col-md-7 mb-4 mb-md-0">
+                <div class="shadow p-4 bg-color-light-gray rounded">
+                    <h5 class="fw-semibold mb-3 text-fg-blue"> Selecciona tu ubicación </h5>
+                    <div class="mb-3">
+                        <label for="estado" class="form-label fw-semibold">Estado</label>
+                        <select id="estado" class="form-select">
+                            <option value= "" selected disabled>Selecciona un estado</option>
+                            <option value="CDMX">Ciudad de México</option>
+                            <option value="EDOMEX">Estado de México</option>
+                            <option value="QRO">Querétaro</option>
+                        </select>
+                    </div>
+                    <div class="mb-4" style="display: none" id="divDelegacion">
+                        <label for="delegacion" class="form-label fw-semibold">Delegación / Municipio</label>
+                        <select id="delegacion" class="form-select">
+                            <option selected disabled>Selecciona una opción</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary fw-semibold px-4" id="btn-buscar">
+                        <i class="fa-solid fa-magnifying-glass-location me-2"></i>Buscar tienda
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-5 text-center">
+                <img src="/imagenes/ubicacion.png" class="img-fluid rounded" style="max-width: 50%;">
+            </div>
+        </div>
+    </section>
+
+    <section data-aos="fade-left" data-aos-duration="1250" class="container my-6">
+        <div class="table-responsive table-striped shadow-sm p-3 bg-light rounded">
+            <table class="table table-hover mb-0 table-bordered text-14px">
+                <thead class="text-white fw-bold">
+                    <tr class="table-dark">
+                        <th scope="col">Sucursal</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Delegación</th>
+                        <th scope="col">Ubicación</th>
+                        <th scope="col">Horario</th>
+                        <th scope="col">Contacto</th>
+                    </tr>
+                </thead>
+                <!--tbody debe cargarse de forma dinámica-->
+                
+                <tbody id="tbody-sucursales">
+                    <!--
+                    <tr class="align-middle">
+                        <th scope="row" class="text-center">1</th>
+                        <th scope="row">Ciudad de México</th>
+                        <th scope="row">Gustavo A. Madero</th>
+                        <th scope="row">Avenida Gustavo Baez #28</th>
+                        <th scope="row">Lunes a Viernes
+                            <br> 10:00 - 18:00 hrs
+                        </th>
+                        <th scope="row" class="text-center">
+                            <img src="/imagenes/acciones/contacto.png" width="32px" style="cursor:pointer;">
+                        </th>
+                    </tr>
+                    -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+
+    <!-- MODAL QUE DEBE SER DINÁMICO EN JS -->
+    <div class="modal fade" id="modalContacto" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-fg-blue">Sucursal BBB</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3 class="fw-semibold text-center mb-3" id = "nombreSucursal">Sucursal 1</h3>
+                    <p class="mb-2"><strong>Teléfono: </strong><span id ="spanTelefono">55 1234 5678</span></p>
+                    <p class="mb-2"><strong>Correo: </strong><span id ="spanCorreo">sucursal@example.com</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer data-include="../reutilizables/footer.html" class="bg-dark text-light pt-5 pb-3 mt-5"></footer>
+</body>
+
+</html>
