@@ -1,5 +1,7 @@
 import { getDelegaciones, buscarPorEstado, buscarPorEstadoDelegacion } from "./Estructuras/Sucursales.js"; // Al hacer el import el archivo se convierte en un modulo
 
+import { getTotalArticulos } from "./Funciones_Carrito.js";
+
 function getEstado(){return document.getElementById("estado").value;}
 function getDelegacion(){return document.getElementById("delegacion").value;} // Se regresa el idDelegacion en lugar del nombre de la delegacion
 
@@ -96,18 +98,17 @@ function cargarTabla(lista){
                 </th>
             </tr>
         `
-    })
+    });
 }
 
-
-function abrirModal(sucursal){
+// Esta parte del código se expone a nivel global para que pueda ser llamada desde el HTML. Sirve para abrir el modal con los datos de contacto de la sucursal
+window.abrirModal = function(sucursal){
     document.getElementById("nombreSucursal").textContent = "Sucursal " + sucursal.estado;
-    document.getElementById("spanTelefono").textContent = "Sucursal " + sucursal.telefono;
-    document.getElementById("spanCorreo").textContent = `Sucursal ${sucursal.correo}`;
+    document.getElementById("spanTelefono").textContent = sucursal.telefono;
+    document.getElementById("spanCorreo").textContent = sucursal.correo;
 
     const modal = new bootstrap.Modal(document.getElementById("modalContacto"));
     modal.show();
-
 }
 
 
@@ -117,4 +118,10 @@ document.addEventListener("DOMContentLoaded", () =>{
         cargarDelegaciones();
     });
     document.getElementById("btn-buscar").addEventListener("click", validarBusqueda)
+
+    // Actualizar el badge del carrito en el inicio.html
+    const spanCarrito = document.getElementById("spanCarrito");
+    if(spanCarrito){
+        spanCarrito.textContent = getTotalArticulos();
+    }
 });
