@@ -2,19 +2,11 @@
 <html lang="es">
     <head data-include="../reutilizables/head.html">
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/opinion.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Alerts más bonitas -->
     <title>Ventas BBB</title>
 </head>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-</script>
-
-<script src="/js/Funciones_Generales.js" defer></script>
-<script type="module" src="/js/Funciones_Contacto.js"></script>
-    
 <body data-include="/reutilizables/scripts.html" class="body-bg-image">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -25,9 +17,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="../inicio.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/bbb/catalogo.html">Catálogo de productos</a></li>
                     <li class="nav-item position-relative">
-                        <a class="nav-link" href="/bbb/carrito.html">
+                        <a class="nav-link" href="/bbb/carrito.html">&nbsp;
                             <i class="fa-solid fa-cart-shopping fa-lg"></i>
                             <span class="position-absolute bottom-0 start-100 translate-middle badge rounded-pill bg-danger" id="spanCarrito">1</span>
                         </a>
@@ -40,100 +31,160 @@
     <header data-include="../reutilizables/header.html" class="bg-light text-center py-3"></header>
 
     <section class="container my-3">
-        <h2 class="text-center fw-bold text-fg-blue mb-4 bg-light"> Encuentra tu tienda más cercana </h2>
-        <p class="text-center fs-5 mx-auto" style="max-width: 800px;">
-            En <strong>Ventas BBB</strong> contamos con una sólida red de sucursales en toda el área metropolitana y sus 
-            alrededores. 
-            <br>
-            Sin importar dónde te encuentres, siempre habrá una tienda BBB cerca de ti, lista para ofrecerte 
-            la mejor atención y servicio al recoger tus productos.
-        </p>
-
-        <div class="row align-items-center mt-5">
-            <div class="col-md-7 mb-4 mb-md-0">
-                <div class="shadow p-4 bg-color-light-gray rounded">
-                    <h5 class="fw-semibold mb-3 text-fg-blue"> Selecciona tu ubicación </h5>
-                    <div class="mb-3">
-                        <label for="estado" class="form-label fw-semibold">Estado</label>
-                        <select id="estado" class="form-select">
-                            <option value= "" selected disabled>Selecciona un estado</option>
-                            <option value="CDMX">Ciudad de México</option>
-                            <option value="EDOMEX">Estado de México</option>
-                            <option value="QRO">Querétaro</option>
-                        </select>
+        <h2 class="text-center fw-bold text-fg-blue bg-light mb-4"> Encuesta de satisfacción </h2>
+        <div class="card shadow-sm mb-4 border-0">
+            <div class="card-header bg-dark text-fg-white d-flex align-items-center py-2">
+                <i class="fa-solid fa-user me-2"></i>
+                <span class="fw-semibold">Datos del usuario</span>
+            </div>
+        </div>
+        <div class="card-body bg-light">
+            <div class="row g-4 ms-2 me-2 border-bottom pb-3">
+                <div class="col-12 col-md-4">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <label for="usuario" class="form-label fw-semibold mb-0 me-2">Usuario:</label>
+                        <input type="text" id="usuario" class="form-control" value="USR-1023" readonly>
                     </div>
-                    <div class="mb-4" style="display: none" id="divDelegacion">
-                        <label for="delegacion" class="form-label fw-semibold">Delegación / Municipio</label>
-                        <select id="delegacion" class="form-select">
-                            <option selected disabled>Selecciona una opción</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-primary fw-semibold px-4" id="btn-buscar">
-                        <i class="fa-solid fa-magnifying-glass-location me-2"></i>Buscar tienda
-                    </button>
                 </div>
-            </div>
-            <div class="col-md-5 text-center">
-                <img src="/imagenes/ubicacion.png" class="img-fluid rounded" style="max-width: 50%;">
-            </div>
-        </div>
-    </section>
-
-    <section data-aos="fade-left" data-aos-duration="1250" class="container my-6">
-        <div class="table-responsive table-striped shadow-sm p-3 bg-light rounded">
-            <table class="table table-hover mb-0 table-bordered text-14px">
-                <thead class="text-white fw-bold">
-                    <tr class="table-dark">
-                        <th scope="col">Sucursal</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Delegación</th>
-                        <th scope="col">Ubicación</th>
-                        <th scope="col">Horario</th>
-                        <th scope="col">Contacto</th>
-                    </tr>
-                </thead>
-                <!--tbody debe cargarse de forma dinámica-->
-                
-                <tbody id="tbody-sucursales">
-                    <!--
-                    <tr class="align-middle">
-                        <th scope="row" class="text-center">1</th>
-                        <th scope="row">Ciudad de México</th>
-                        <th scope="row">Gustavo A. Madero</th>
-                        <th scope="row">Avenida Gustavo Baez #28</th>
-                        <th scope="row">Lunes a Viernes
-                            <br> 10:00 - 18:00 hrs
-                        </th>
-                        <th scope="row" class="text-center">
-                            <img src="/imagenes/acciones/contacto.png" width="32px" style="cursor:pointer;">
-                        </th>
-                    </tr>
-                    -->
-                </tbody>
-            </table>
-        </div>
-    </section>
+                <div class="col-12 col-md-5">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <label for="correo" class="form-label fw-semibold mb-0 me-2">Correo:</label>
+                        <div class="input-group">
+                            <input type="email" id="correo" class="form-control" value="usuario@ventasbbb.mx" readonly>
+                            <button class="btn btn-outline-primary" type="button">Cambiar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <label for="fecha" class="form-label fw-semibold mb-0 me-2">Fecha:</label>
+                        <input type="text" id="fecha" class="form-control" value="03/11/2025" readonly>
+                    </div>
+                </div>
     
+            </div> 
+        </div>
+        
+        <br />
 
-    <!-- MODAL QUE DEBE SER DINÁMICO EN JS -->
-    <div class="modal fade" id="modalContacto" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-md">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-fg-blue">Sucursal BBB</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-                </div>
-                <div class="modal-body">
-                    <h3 class="fw-semibold text-center mb-3" id = "nombreSucursal">Sucursal 1</h3>
-                    <p class="mb-2"><strong>Teléfono: </strong><span id ="spanTelefono">55 1234 5678</span></p>
-                    <p class="mb-2"><strong>Correo: </strong><span id ="spanCorreo">sucursal@example.com</span></p>
+        <div class="card shadow-sm bg-light pb-3">
+            <div class="card-header bg-dark text-fg-white d-flex align-items-center">
+                <i class="fa-solid fa-bag-shopping me-2"></i>
+                <span class="fw-semibold">Cuéntanos tu experiencia:</span>
+            </div>
+            <div class="card-body">
+                <p class="mb-3">Selecciona la categoría donde hayas comprado: </p>
+                <select class="form-select mb-4" id = "categoria">
+                    <option value="0" selected style="color: lightgray">Selecciona la opción</option>
+                    <option value="1">Electrónica</option>
+                    <option value="2">Moda</option>
+                    <option value="3">Hogar</option>
+                    <option value="4">Deportes</option>
+                    <option value="5">Regalos</option>
+                </select>
+
+                <!-- <div style="display: none;"> -->
+                <div class="table-responsive" style="display: none;" id = "contenedorTabla">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Pregunta</th>
+                                <th class="text-center">Pésimo</th>
+                                <th class="text-center">Regular</th>
+                                <th class="text-center">Bueno</th>
+                                <th class="text-center">Muy Bueno</th>
+                                <th class="text-center">Excelente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>¿Cómo calificarías la calidad del producto?</td>
+                                <td class="text-center"><input type="radio" name="quality" value="1"></td>
+                                <td class="text-center"><input type="radio" name="quality" value="2"></td>
+                                <td class="text-center"><input type="radio" name="quality" value="3"></td>
+                                <td class="text-center"><input type="radio" name="quality" value="4"></td>
+                                <td class="text-center"><input type="radio" name="quality" value="5"></td>
+                            </tr>
+                            <tr>
+                                <td>¿Qué tal tu experiencia con el servicio dinámico?</td>
+                                <td class="text-center"><input type="radio" name="service" value="1"></td>
+                                <td class="text-center"><input type="radio" name="service" value="2"></td>
+                                <td class="text-center"><input type="radio" name="service" value="3"></td>
+                                <td class="text-center"><input type="radio" name="service" value="4"></td>
+                                <td class="text-center"><input type="radio" name="service" value="5"></td>
+                            </tr>
+                            <tr>
+                                <td>¿Cómo fue tu trato y experiencia del envío?</td>
+                                <td class="text-center"><input type="radio" name="variety" value="1"></td>
+                                <td class="text-center"><input type="radio" name="variety" value="2"></td>
+                                <td class="text-center"><input type="radio" name="variety" value="3"></td>
+                                <td class="text-center"><input type="radio" name="variety" value="4"></td>
+                                <td class="text-center"><input type="radio" name="variety" value="5"></td>
+                            </tr>
+                            <tr>
+                                <td>¿Cómo calificarías la relación calidad-precio?</td>
+                                <td class="text-center"><input type="radio" name="value" value="1"></td>
+                                <td class="text-center"><input type="radio" name="value" value="2"></td>
+                                <td class="text-center"><input type="radio" name="value" value="3"></td>
+                                <td class="text-center"><input type="radio" name="value" value="4"></td>
+                                <td class="text-center"><input type="radio" name="value" value="5"></td>
+                            </tr>
+                            <tr>
+                                <td>¿Tu producto cumple con todas las especificaciones solicitadas?</td>
+                                <td class="text-center"><input type="radio" name="specifications" value="1"></td>
+                                <td class="text-center"><input type="radio" name="specifications" value="2"></td>
+                                <td class="text-center"><input type="radio" name="specifications" value="3"></td>
+                                <td class="text-center"><input type="radio" name="specifications" value="4"></td>
+                                <td class="text-center"><input type="radio" name="specifications" value="5"></td>
+                            </tr>
+                            <tr>
+                                <td>¿Cuál fue tu expectativa comprando en Tiendas BBB?</td>
+                                <td class="text-center"><input type="radio" name="expects" value="1"></td>
+                                <td class="text-center"><input type="radio" name="expects" value="2"></td>
+                                <td class="text-center"><input type="radio" name="expects" value="3"></td>
+                                <td class="text-center"><input type="radio" name="expects" value="4"></td>
+                                <td class="text-center"><input type="radio" name="expects" value="5"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>¿Qué debe mejorar para la experiencia en Tiendas BBB?</strong></p>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="improve-price" value="Precio"><label for="improve-price">Precio</label><br>
+                        <input type="checkbox" id="improve-quality" value="Quality"><label for="improve-quality">Calidad</label><br>
+                        <input type="checkbox" id="improve-shipping" value="Envio"><label for="improve-shipping">Envío</label><br>
+                        <input type="checkbox" id="improve-stock" value="Stock"><label for="improve-stock">Catálogo</label><br>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
+        <br />
+
+        <div class="card shadow-sm pb-3 bg-light">
+            <div class="card-header bg-dark text-fg-white d-flex align-items-center">
+                <i class="fa-solid fa-comment me-2"></i>
+                <span class="fw-semibold">Comentarios o sugerencias:</span>
+            </div>
+            <div class="card-body">
+                <label class="form-label fw-semibold">Escribe tus comentarios:</label>
+                <textarea name="" id="" rows="5" class="form-control" placeholder="Ingresa el texto aquí..."></textarea>
+            </div>
+            <div class="text-end">
+                <div class="text-center">
+                    <button class="btn btn-primary px-4 me-2" id="btn-enviar">Enviar</button>
+                    <button class="btn btn-outline-secondary px-4" id="btn-limpiar">Limpiar</button> <!--Los botones deben tener un id diferente para poder modificar sus accioes-->
+                </div>
+            </div>
+        </div>    
+    </section>
 
     <footer data-include="../reutilizables/footer.html" class="bg-dark text-light pt-5 pb-3 mt-5"></footer>
+
+    <script src="../js/Funciones_Generales.js" defer></script>
+    <!--Los dos puntos sirven para salir de la carpeta en que se está-->
+    <script type = "module" src="../js/Funciones_Opinion.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script> AOS.init(); </script>
 </body>
 
 </html>
