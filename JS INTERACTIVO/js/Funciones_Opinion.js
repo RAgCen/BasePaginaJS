@@ -1,5 +1,7 @@
 import { getNombreUsuario, getCorreoUsuario} from "./Estructuras/Usuario.js";
 
+import { getTotalArticulos } from "./Funciones_Carrito.js";
+
 // usuario
 function rellenarDatos(){
     document.getElementById("usuario").value = getNombreUsuario();
@@ -93,4 +95,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("categoria").addEventListener("change", mostrarTabla);
     document.getElementById("btn-enviar").addEventListener("click", validarFormulario);
     document.getElementById("btn-limpiar").addEventListener("click", limpiarFormulario);
+
+    // Actualizar el badge del carrito en el inicio.html
+    const spanCarrito = document.getElementById("spanCarrito");
+    if(spanCarrito){
+        spanCarrito.textContent = getTotalArticulos();
+    }
 })
