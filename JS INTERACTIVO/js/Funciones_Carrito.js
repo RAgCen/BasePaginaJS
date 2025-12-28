@@ -117,7 +117,7 @@ function agregarEventos(){
                 actualizarCostos(id, color, 1);
             } else if(target.classList.contains('btn-menos')){
                 actualizarCostos(id, color, -1);
-            }         
+            }
         }
     }
 }
@@ -126,7 +126,7 @@ function agregarEventos(){
 function aplicarCupon(){
     const inputCupon = document.getElementById("cupon-txt");
     const spanDescuento = document.getElementById("spanDescuento");
-    const btnDescuento = document.getElementById("btn-dcto");
+    // const btnDescuento = document.getElementById("btn-dcto");
     const cuponTexto = inputCupon.value.toUpperCase().trim();
 
     if(cuponTexto === ""){
@@ -215,4 +215,3 @@ document.addEventListener("DOMContentLoaded", () => {
         spanCarrito.textContent = getTotalArticulos();
     }
 });
-
