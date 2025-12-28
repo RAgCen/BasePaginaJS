@@ -57,33 +57,36 @@
                         <th scope="col" style="width: 10%;">&nbsp;</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="cuerpoTabla">
                     <tr>
-                        <th scope="row">1</th>
-                        <td>
-                        <i class="fa-solid fa-box-open fa-3x bg-cartoon-box"></i>
-                        </td>
-                        <td class="text-start">Caja de cartón de muestra resistente, ideal para embalaje.</td>
-                        <td>$499.00</td>
-                        <td>
-                        <div class="d-flex justify-content-center align-items-center flex-column gap-1">
-                            <span>1</span>
-                            <div class="d-flex flex-row gap-3">
-                                <button class="btn btn-outline-success btn-sm rounded-circle">
-                                    <i class="fa-solid fa-plus fa-lg"></i>
-                                </button>
-                                <button class="btn btn-outline-danger btn-sm rounded-circle">
-                                    <i class="fa-solid fa-minus fa-lg"></i>
-                                </button>
+                        <!--
+                        ------------- Muestra de cómo se ve el carrito. Sirve de referencia -------------
+                            <th scope="row">1</th>
+                            <td>
+                            <i class="fa-solid fa-box-open fa-3x bg-cartoon-box"></i>
+                            </td>
+                            <td class="text-start">Caja de cartón de muestra resistente, ideal para embalaje.</td>
+                            <td>$499.00</td>
+                            <td>
+                            <div class="d-flex justify-content-center align-items-center flex-column gap-1">
+                                <span>1</span>
+                                <div class="d-flex flex-row gap-3">
+                                    <button class="btn btn-outline-success btn-sm rounded-circle" id="">
+                                        <i class="fa-solid fa-plus fa-lg"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger btn-sm rounded-circle">
+                                        <i class="fa-solid fa-minus fa-lg"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        </td>
-                        <td>$499.00</td>
-                        <td>
-                            <div>
-                                <img src="/imagenes/acciones/eliminar.png" width="27" height="27" style="cursor:pointer">
-                            </div>
-                        </td>
+                            </td>
+                            <td>$499.00</td>
+                            <td>
+                                <div>
+                                    <img src="/imagenes/acciones/eliminar.png" width="27" height="27" style="cursor:pointer">
+                                </div>
+                            </td>
+                        -->
                     </tr>
                 </tbody>
             </table>
@@ -93,8 +96,8 @@
             <div class="col-md-6 mb-4">
                 <h5 class="fw-bold text-fg-blue">Cupón de descuento</h5>
                 <div class="input-group mt-2">
-                    <input type="text" class="form-control" placeholder="Introduce tu cupón...">
-                    <button class="btn btn-primary fw-semibold" type="button">Aplicar</button>
+                    <input type="text" class="form-control" id="cupon-txt" placeholder="Introduce tu cupón...">
+                    <button class="btn btn-primary fw-semibold" type="button" id="btn-dcto">Aplicar</button>
                 </div>
             </div>
       
@@ -103,23 +106,23 @@
                     <h5 class="fw-bold text-fg-blue mb-3">Total de compra</h5>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Cantidad de artículos:</span>
-                        <span class="fw-semibold">1</span>
+                        <span class="fw-semibold" id="spanCantidad">1</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Subtotal:</span>
-                        <span class="fw-semibold">$499.00</span>
+                        <span class="fw-semibold" id="spanSubtotal">$499.00</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Descuento aplicado:</span>
-                        <span class="fw-semibold text-success">-15%</span>
+                        <span class="fw-semibold text-success" id="spanDescuento">-15%</span>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between fs-5 fw-bold mb-3">
                         <span>Total:</span>
-                        <span>$499.00</span>
+                        <span id="spanTotal">$499.00</span>
                     </div>
                     <div class="text-end">
-                        <button class="btn btn-success fw-semibold px-4">Proceder al pago</button>
+                        <button class="btn btn-success fw-semibold px-4" id="btn-fin">Proceder al pago</button>
                     </div>
                 </div>
             </div>
@@ -130,5 +133,3 @@
 </body>
 
 </html>
-
-
