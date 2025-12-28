@@ -260,12 +260,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
     // Actualizar el badge del carrito en el inicio.html
-    document.addEventListener("DOMContentLoaded", () => {
-        const spanCarrito = document.getElementById("spanCarrito");
-        if(spanCarrito){
-            spanCarrito.textContent = getTotalArticulos();
-        }
-    })
+    const spanCarrito = document.getElementById("spanCarrito");
+    if(spanCarrito){
+        spanCarrito.textContent = getTotalArticulos();
+    }
 })
+
